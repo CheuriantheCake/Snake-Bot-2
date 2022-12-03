@@ -32,7 +32,6 @@ window.onload = () => {
     context = board.getContext("2d"); //for drawing on the board
 
     placeFood();
-
     
     // update();
     setInterval(update, 120); //120 milliseconds
@@ -64,6 +63,56 @@ window.onload = () => {
     if (snakeY > foodY) {
         velocityX = 0;
         velocityY = -1;
+    }
+
+    if (snakeX == 0) {
+        velocityX = 0;
+        velocityY = 1;
+
+        if (snakeX < foodX) {
+            velocityX = 1;
+            velocityY = 0;
+        }
+        // if snake is to the right of food, move to the left
+        if (snakeX > foodX) {
+            velocityX = -1;
+            velocityY = 0;
+        }
+        // if snake is above food, move down
+        if (snakeY < foodY) {
+            velocityX = 0;
+            velocityY = 1;
+        }
+        // if snake is below food, move up
+        if (snakeY > foodY) {
+            velocityX = 0;
+            velocityY = -1;
+        }
+    }
+
+    if (snakeX == 24) {
+        velocityX = 0;
+        velocityY = -1;
+
+        if (snakeX < foodX) {
+            velocityX = 1;
+            velocityY = 0;
+        }
+        // if snake is to the right of food, move to the left
+        if (snakeX > foodX) {
+            velocityX = -1;
+            velocityY = 0;
+        }
+        // if snake is above food, move down
+        if (snakeY < foodY) {
+            velocityX = 0;
+            velocityY = 1;
+        }
+        // if snake is below food, move up
+        if (snakeY > foodY) {
+            velocityX = 0;
+            velocityY = -1;
+        }
     }
 
     context.fillStyle="black";
@@ -113,27 +162,6 @@ window.onload = () => {
         document.getElementById("score").innerHTML = `Score: ` + `${score}`;
     }
  }
-
-
- 
-function changeDirection(e) {   //key event
-    if (e.code == "ArrowUp" && velocityY != 1) {  // on Y axis
-        velocityX = 0;
-        velocityY = -1;
-    }
-    else if (e.code == "ArrowDown" && velocityY != -1) { // on Y axis
-        velocityX = 0;
-        velocityY = 1;
-    }
-    else if (e.code == "ArrowLeft" && velocityX != 1) { // on X axis
-        velocityX = -1;
-        velocityY = 0;
-    }
-    else if (e.code == "ArrowRight" && velocityX != -1) { // on X axis
-        velocityX = 1;
-        velocityY = 0;
-    }
-}
 
 
  function placeFood() {
